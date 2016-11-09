@@ -93,6 +93,19 @@ export const configurationSchema = {
   required: ['from', 'transport']
 }
 
+export const testConfigurationSchema = {
+  type: 'object',
+
+  properties: {
+    to: {
+      type: 'string',
+      description: 'receiver of a mail test'
+    }
+  },
+
+  additionalProperties: false,
+  required: ['to']
+}
 // ===================================================================
 
 class TransportEmailPlugin {
@@ -141,6 +154,11 @@ class TransportEmailPlugin {
     this._unset()
   }
 
+  test ({to}) {
+    return this._sendEmail({to: to,
+      subject: 'Configuration test',
+      markdown: '**Configuration works**'})
+  }
   _sendEmail ({
     from = this._conf.from,
     to, cc, bcc,
