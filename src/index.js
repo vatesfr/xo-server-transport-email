@@ -99,13 +99,14 @@ export const testSchema = {
   properties: {
     to: {
       type: 'string',
-      description: 'receiver of a mail test'
+      description: 'recipient of the test mail'
     }
   },
 
   additionalProperties: false,
   required: ['to']
 }
+
 // ===================================================================
 
 class TransportEmailPlugin {
@@ -157,8 +158,10 @@ class TransportEmailPlugin {
   test ({to}) {
     return this._sendEmail({
       to,
-      subject: 'Configuration test',
-      markdown: '**Configuration works**'
+      subject: '[Xen Orchestra] Test of transport-email plugin',
+      markdown: `Hi there,
+
+The transport-email plugin for Xen Orchestra server seems to be working fine, nicely done :)`
     })
   }
 
