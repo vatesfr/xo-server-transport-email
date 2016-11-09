@@ -93,7 +93,7 @@ export const configurationSchema = {
   required: ['from', 'transport']
 }
 
-export const testConfigurationSchema = {
+export const testSchema = {
   type: 'object',
 
   properties: {
@@ -155,10 +155,13 @@ class TransportEmailPlugin {
   }
 
   test ({to}) {
-    return this._sendEmail({to: to,
+    return this._sendEmail({
+      to,
       subject: 'Configuration test',
-      markdown: '**Configuration works**'})
+      markdown: '**Configuration works**'
+    })
   }
+
   _sendEmail ({
     from = this._conf.from,
     to, cc, bcc,
